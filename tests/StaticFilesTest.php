@@ -2,6 +2,7 @@
 
 namespace Matthimatiker\Stack;
 
+use Stack\Builder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -70,6 +71,21 @@ class StaticFilesTest extends \PHPUnit_Framework_TestCase
         $response = $this->middleware->handle($request);
 
         $this->assertSame($innerResponse, $response);
+    }
+
+    /**
+     * Checks if the stack builder can be used to create the middleware.
+     *
+     * @see https://github.com/stackphp/builder
+     */
+    public function testMiddlewareCanBeCreatedByBuilder()
+    {
+        $stack = (new Builder())
+            ->push(StaticFiles::class, __DIR__ . '/_files');
+
+        $app = $stack->resolve($this->innerKernel);
+
+        $this->assertInstanceOf(HttpKernelInterface::class, $app);
     }
 
     /**
