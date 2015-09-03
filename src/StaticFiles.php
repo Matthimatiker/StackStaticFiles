@@ -52,10 +52,46 @@ class StaticFiles implements HttpKernelInterface
      */
     public function handle(Request $request, $type = self::MASTER_REQUEST, $catch = true)
     {
-        $filePath = $this->webDir . '/' . ltrim($request->getPathInfo(), '/');
-        if (is_file($filePath)) {
-            return new Response(file_get_contents($filePath));
+        $filePath = $this->getFilePath($request);
+        if ($this->canServe($filePath)) {
+            return $this->serve($filePath);
         }
         return $this->innerKernel->handle($request, $type, $catch);
+    }
+
+    /**
+     * Determines the file path that corresponds to the given request.
+     *
+     * @param Request $request
+     * @return string
+     */
+    protected function getFilePath(Request $request)
+    {
+        return $this->webDir . '/' . ltrim($request->getPathInfo(), '/');
+    }
+
+    /**
+     * Checks if the given file can be served.
+     *
+     * @param string $filePath
+     * @return boolean
+     */
+    protected function canServe($filePath)
+    {
+        return is_file($filePath);
+    }
+
+    /**
+     * Creates a response that is used to serve the given file.
+     *
+     * When this method is called it is guaranteed, that the given file exists
+     * and that it may be served.
+     *
+     * @param string $filePath
+     * @return Response
+     */
+    protected function serve($filePath)
+    {
+        return new Response(file_get_contents($filePath));
     }
 }
