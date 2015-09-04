@@ -6,11 +6,6 @@
 Simple [StackPHP](http://stackphp.com/) middleware that serves files from a given directory.
 If the requested file does not exist, then the request is delegated to the next kernel.
 
-## Initialization Tasks (remove this block once you are done) ##
-
-- Publish at [Packagist](https://packagist.org/)
-- Create webhook that pushes repository updates to [Packagist](https://packagist.org/)
-
 ## Motivation ##
 
 This middleware has been created to be able to use [php-pm/php-pm](https://github.com/php-pm/php-pm)
