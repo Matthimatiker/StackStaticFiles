@@ -31,5 +31,14 @@ Add the following dependency to your ``composer.json``:
 
 ## Usage ##
 
+You can use [stack/builder](https://github.com/stackphp/builder) to compose your middleware stack:
+
+    $stack = (new Builder())->push(StaticFiles::class, __DIR__ . '/public-files');
+    $app = $stack->resolve($kernel);
+
+Alternatively, you can combine kernel and middleware manually:
+
+    $app = new StaticFiles($kernel,  __DIR__ . '/public-files');
+
 ## Known Issues ##
 
