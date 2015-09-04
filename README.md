@@ -11,9 +11,21 @@ If the requested file does not exist, then the request is delegated to the next 
 - Publish at [Packagist](https://packagist.org/)
 - Create webhook that pushes repository updates to [Packagist](https://packagist.org/)
 
-## Motivation: Why does this project exist? ##
+## Motivation ##
+
+This middleware has been created to be able to use [php-pm/php-pm](https://github.com/php-pm/php-pm)
+with [php-pm/php-pm-httpkernel](https://github.com/php-pm/php-pm-httpkernel) as a standalone server.
+It avoided the need of nginx for serving static files.
 
 ## Installation ##
+
+This library is installed via [Composer](http://getcomposer.org/).
+Add the following dependency to your ``composer.json``:
+
+    "require" :  {
+        // ...
+        "matthimatiker/stack-static-files": "^0.0.1"
+    }
 
 ## Concept ##
 
