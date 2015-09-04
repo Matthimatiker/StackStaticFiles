@@ -42,3 +42,6 @@ Alternatively, you can combine kernel and middleware manually:
 
 ## Known Issues ##
 
+Do *not* register a directory, which contains files that should not be served!
+This middleware has no security baked in and will serve *any* existing file, for example 
+PHP scripts, VCS files etc.
